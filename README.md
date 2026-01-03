@@ -10,13 +10,14 @@ This project builds an internal **Retrieval-Augmented Generation (RAG)** chatbot
 
 Using real-world consumer complaint data (inspired by CFPB), the tool enables Product Managers, Support, and Compliance teams to ask natural-language questions about customer pain points across five product lines:
 
-- Credit Cards  
-- Personal Loans  
-- Savings Accounts  
-- Money Transfers  
+* Credit Cards  
+* Personal Loans  
+* Savings Accounts  
+* Money Transfers  
 
-The system retrieves relevant complaint excerpts via semantic search (vector database + embeddings), then generates concise, evidence-backed answers using a language model.  
-Goal: Turn thousands of monthly unstructured complaints into actionable, real-time insights — reducing analysis time from days to minutes and shifting the company from reactive firefighting to proactive product & risk improvement.
+The system retrieves relevant complaint excerpts via semantic search (vector database + embeddings), then generates concise, evidence-backed answers using a language model.
+
+**Goal:** Turn thousands of monthly unstructured complaints into actionable, real-time insights—reducing analysis time from days to minutes and shifting the company from reactive firefighting to proactive product and risk improvement.
 ---
 
 ## 📖 Business Objective
