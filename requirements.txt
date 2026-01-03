@@ -12,6 +12,9 @@ ipykernel==6.29.4
 # Testing
 pytest==8.2.1
 
+# required engine for parquet
+pyarrow>=15.0
+
 # --- Task 2 & 3: Embeddings, Vector Store, & RAG (Commented) ---
 # Frameworks
 # langchain==0.2.0
