@@ -103,6 +103,10 @@ rag-complaint-chatbot/
     Analyze data in `notebooks/01_eda_preprocessing.ipynb`, then run the cleaning script:
     ```bash
     python scripts/preprocess.py
+     ```
+    or specify paths if you move things around
+    ```bash
+    python scripts/preprocess.py --input data/raw/complaints.csv --output_dir data/processed
     ```
 
 2.  **Vector Store Creation**
@@ -129,8 +133,8 @@ rag-complaint-chatbot/
 | Phase | Task Description | Status |
 | :--- | :--- | :--- |
 | **0. Setup** | Project Structure, Git, CI/CD, and Environment Setup | ✅ **Completed** |
-| **1. Data** | **EDA & Preprocessing:** Cleaning CFPB data, analyzing narrative lengths, filtering for specific financial products. | 🔄 **In Progress** |
-| **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | 📅 Planned |
+| **1. Data** | **EDA & Preprocessing:** Cleaning CFPB data, analyzing narrative lengths, filtering for specific financial products. | ✅ **Completed** |
+| **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | 🔄 **In Progress** |
 | **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | 📅 Planned |
 | **4. App** | **User Interface:** Building an interactive Gradio/Streamlit web app for stakeholders. | 📅 Planned |
 ---
