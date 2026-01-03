@@ -1,0 +1,23 @@
+# --- Python Standard ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# --- Virtual Environments ---
+venv/
+.venv/
+env/
+
+# --- Project Data & Artifacts (Important!) ---
+# We do not want to push large CSVs or Vector Stores to GitHub
+data/
+vector_store/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- IDE Settings ---
+.vscode/
+.idea/
+.env
