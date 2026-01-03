@@ -16,7 +16,6 @@ Using real-world consumer complaint data (inspired by CFPB), the tool enables Pr
 - Money Transfers  
 
 The system retrieves relevant complaint excerpts via semantic search (vector database + embeddings), then generates concise, evidence-backed answers using a language model.  
-
 Goal: Turn thousands of monthly unstructured complaints into actionable, real-time insights — reducing analysis time from days to minutes and shifting the company from reactive firefighting to proactive product & risk improvement.
 ---
 
