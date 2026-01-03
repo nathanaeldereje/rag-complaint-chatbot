@@ -1,14 +1,12 @@
-# 🔬 Development Notebooks
-
+# Notebooks
 This directory serves as the **experimental lab** for the CrediTrust RAG project. Here, we perform data analysis, prototype our RAG logic, and test code before migrating it to the production `scripts/` folder.
 
-## 📚 Notebook Directory
 
-The notebooks are numbered to follow the project's logical workflow.
+### 📓 Notebook Directory
 
-| Notebook | Task | Description |
-| :--- | :--- | :--- | :--- |
-| **`01_eda_preprocessing.ipynb`** | **Task 1** | Exploratory Data Analysis. Loading the CFPB dataset, analyzing complaint lengths, checking product distribution, and cleaning text for embeddings. | 
-| **`02_chunking_embedding.ipynb`** | **Task 2** | Stratified sampling, experimenting with chunk sizes (RecursiveCharacterTextSplitter), and generating vector embeddings with `all-MiniLM-L6-v2`. | 
-| **`03_rag_pipeline_proto.ipynb`** | **Task 3** | Prototyping the retrieval logic. Testing similarity search and designing prompt templates for the LLM. | 
-| **`04_evaluation_bench.ipynb`** | **Task 3** | Qualitative evaluation. Running the pipeline against specific test questions to rate the quality of answers. | 
+| Notebook | Phase | Primary Objective | Key Output |
+| --- | --- | --- | --- |
+| **`01_eda_preprocessing.ipynb`** | **Phase 1** | Clean raw CFPB data and analyze complaint distributions. | `filtered_complaints.csv` |
+| **`02_chunking_embedding.ipynb`** | **Phase 2** | Experiment with chunking strategies and embedding models. | Vector Index Prototype |
+| **`03_rag_pipeline_proto.ipynb`** | **Phase 3** | Design RAG prompt templates and retrieval logic. | RAG Chain Logic |
+| **`04_evaluation_bench.ipynb`** | **Phase 3** | Benchmark LLM responses against ground-truth questions. | Model Performance Metrics |
