@@ -10,14 +10,13 @@ This project builds an internal **Retrieval-Augmented Generation (RAG)** chatbot
 
 Using real-world consumer complaint data (inspired by CFPB), the tool enables Product Managers, Support, and Compliance teams to ask natural-language questions about customer pain points across five product lines:
 
-* Credit Cards
-* Personal Loans
-* Savings Accounts
-* Money Transfers
+    * Credit Cards
+    * Personal Loans
+    * Savings Accounts
+    * Money Transfers
 
-The system retrieves relevant complaint excerpts via semantic search (vector database + embeddings), then generates concise, evidence-backed answers using a language model.
-
-    **Goal:** Turn thousands of monthly unstructured complaints into actionable, real-time insights—reducing analysis time from days to minutes and shifting the company from reactive firefighting to proactive product and risk improvement.
+- The system retrieves relevant complaint excerpts via semantic search (vector database + embeddings), then generates concise, evidence-backed answers using a language model.
+- **Goal:** Turn thousands of monthly unstructured complaints into actionable, real-time insights—reducing analysis time from days to minutes and shifting the company from reactive firefighting to proactive product and risk improvement.
 
 ---
 
@@ -96,6 +95,37 @@ rag-complaint-chatbot/
     ```bash
     pytest
     ```
+
+
+### 🔄 Recommended Workflow
+
+1.  **Data Preparation**
+    Analyze data in `notebooks/01_eda_preprocessing.ipynb`, then run the cleaning script:
+    ```bash
+    python scripts/preprocess.py
+     ```
+    or specify paths if you move things around
+    ```bash
+    python scripts/preprocess.py --input data/raw/complaints.csv --output_dir data/processed
+    ```
+
+2.  **Vector Store Creation**
+    Experiment in `notebooks/02_chunking_embedding.ipynb`, then build the search index:
+    ```bash
+    python scripts/chunk_and_embed.py
+    ```
+
+3.  **RAG Pipeline & Testing**
+    Refine logic in `notebooks/03_rag_pipeline_proto.ipynb`, then test via CLI:
+    ```bash
+    python scripts/rag_pipeline_test.py --question "Why are fees so high?"
+    ```
+
+4.  **Launch Interface**
+    Start the user-facing web application:
+    ```bash
+    python app.py
+    ```
 ---
 
 ## 🚀 Project Progress & Roadmap
@@ -103,8 +133,8 @@ rag-complaint-chatbot/
 | Phase | Task Description | Status |
 | :--- | :--- | :--- |
 | **0. Setup** | Project Structure, Git, CI/CD, and Environment Setup | ✅ **Completed** |
-| **1. Data** | **EDA & Preprocessing:** Cleaning CFPB data, analyzing narrative lengths, filtering for specific financial products. | 🔄 **In Progress** |
-| **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | 📅 Planned |
+| **1. Data** | **EDA & Preprocessing:** Cleaning CFPB data, analyzing narrative lengths, filtering for specific financial products. | ✅ **Completed** |
+| **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | 🔄 **In Progress** |
 | **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | 📅 Planned |
 | **4. App** | **User Interface:** Building an interactive Gradio/Streamlit web app for stakeholders. | 📅 Planned |
 ---
@@ -112,5 +142,5 @@ rag-complaint-chatbot/
 
 **Built by:** Nathanael Dereje
 
-**Current Date:** January 3, 2026  
+**Date of Completion:** January , 2026  
 
