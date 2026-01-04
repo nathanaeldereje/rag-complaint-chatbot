@@ -96,13 +96,22 @@ def build_vector_store(documents, output_dir):
     embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     
     logger.info(f"Creating FAISS index at {output_dir}. This may take a while...")
-    
-    # Build FAISS Index
-    vectorstore = FAISS.from_documents(
-        documents=documents,
-        embedding=embedding_model
-    )
-    
+
+        # --- BATCHING LOGIC START ---
+    batch_size = 1000 # Process 1000 chunks at a time
+    total_docs = len(documents)
+
+        # Initialize FAISS with the first batch to create the structure
+    logger.info("Initializing index with first batch...")
+    vectorstore = FAISS.from_documents(documents[:batch_size], embedding_model)
+
+        # Process the rest in batches
+    # We start from batch_size because we already did the first 0-1000
+    for i in tqdm(range(batch_size, total_docs, batch_size), desc="Embedding Batches"):
+        batch = documents[i : i + batch_size]
+        vectorstore.add_documents(batch)
+    # --- BATCHING LOGIC END ---
+
     # Save Locally
     vectorstore.save_local(output_dir)
     
