@@ -103,44 +103,44 @@ rag-complaint-chatbot/
     Analyze data in `notebooks/01_eda_preprocessing.ipynb`, then run the cleaning script:
     ```bash
     python scripts/preprocess.py
-     ```
-    or specify paths if you move things around
+    ```
+    *Or with specific paths:*
     ```bash
     python scripts/preprocess.py --input data/raw/complaints.csv --output_dir data/processed
     ```
 
 2.  **Vector Store Creation**
-    Experiment in `notebooks/02_chunking_embedding.ipynb`, then build the search index:
+    Experiment with chunking in `notebooks/02_chunking_embedding.ipynb`, then build the FAISS index:
     ```bash
-    python scripts/chunk_and_embed.py
+    python scripts/build_vector_store.py --sample_size 12500
     ```
 
-3.  **RAG Pipeline & Testing**
-    Refine logic in `notebooks/03_rag_pipeline_proto.ipynb`, then test via CLI:
+3.  **RAG Pipeline & Testing** (Upcoming)
+    Refine retrieval logic in `notebooks/03_rag_logic.ipynb`, then test via CLI:
     ```bash
-    python scripts/rag_pipeline_test.py --question "Why are fees so high?"
+    python scripts/rag_pipeline.py --question "Why are fees so high?"
     ```
 
-4.  **Launch Interface**
+4.  **Launch Interface** (Upcoming)
     Start the user-facing web application:
     ```bash
     python app.py
     ```
 ---
 
-## 🚀 Project Progress & Roadmap
+## 🚀 Project Progress & Roadmap (As of Jan 4/ 2026)
 
 | Phase | Task Description | Status |
 | :--- | :--- | :--- |
 | **0. Setup** | Project Structure, Git, CI/CD, and Environment Setup | ✅ **Completed** |
 | **1. Data** | **EDA & Preprocessing:** Cleaning CFPB data, analyzing narrative lengths, filtering for specific financial products. | ✅ **Completed** |
-| **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | 🔄 **In Progress** |
-| **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | 📅 Planned |
+| **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | ✅ **Completed** |
+| **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | 🔄 **In Progress** |
 | **4. App** | **User Interface:** Building an interactive Gradio/Streamlit web app for stakeholders. | 📅 Planned |
 ---
 *Developed as part of the CrediTrust Financial AI Engineering Initiative.*
 
 **Built by:** Nathanael Dereje
 
-**Date of Completion:** January , 2026  
+**Date of Completion:** January, 2026  
 
