@@ -128,19 +128,19 @@ rag-complaint-chatbot/
     ```
 ---
 
-## 🚀 Project Progress & Roadmap
+## 🚀 Project Progress & Roadmap (As of Jan 4/ 2026)
 
 | Phase | Task Description | Status |
 | :--- | :--- | :--- |
 | **0. Setup** | Project Structure, Git, CI/CD, and Environment Setup | ✅ **Completed** |
 | **1. Data** | **EDA & Preprocessing:** Cleaning CFPB data, analyzing narrative lengths, filtering for specific financial products. | ✅ **Completed** |
-| **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | 🔄 **In Progress** |
-| **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | 📅 Planned |
+| **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | ✅ **Completed** |
+| **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | 🔄 **In Progress** |
 | **4. App** | **User Interface:** Building an interactive Gradio/Streamlit web app for stakeholders. | 📅 Planned |
 ---
 *Developed as part of the CrediTrust Financial AI Engineering Initiative.*
 
 **Built by:** Nathanael Dereje
 
-**Date of Completion:** January , 2026  
+**Date of Completion:** January, 2026  
 
