@@ -4,41 +4,40 @@ Standalone Python scripts for building the CrediTrust RAG complaint chatbot.
 
 ## Available Scripts
 
-| Script                  | Purpose                                                                 | Typical Command Example                                      |
-|-------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------|
-| `preprocess.py`         | Load CFPB data → filter products → clean narratives → save CSV          | `python preprocess.py --input raw.csv --output filtered.csv` |
-| `sample_data.py`        | Create stratified 10k–15k sample for fast prototyping                   | `python sample_data.py --input filtered.csv --size 12000`    |
-| `chunk_and_embed.py`    | Chunk text → generate embeddings → build small test vector store        | `python chunk_and_embed.py --input sample.csv --output_dir vector_store/test` |
-| `build_full_index.py`   | Load pre-built embeddings → create full Chroma/FAISS index              | `python build_full_index.py --embeddings complaint_embeddings.parquet --db chroma` |
-| `rag_pipeline_test.py`  | Quick end-to-end test: retrieve + generate answers from command line    | `python rag_pipeline_test.py --question "Why are credit cards delayed?"` |
-| `utils.py`              | Shared helpers (cleaning, chunking, embedding loading, etc.)            | (imported by other scripts)                                  |
+| Script | Purpose | Typical Command Example |
+| :--- | :--- | :--- |
+| `preprocess.py` | **Task 1:** Load raw CFPB data → filter products → clean narratives → save Parquet | `python scripts/preprocess.py --input data/raw/complaints.csv` |
+| `build_vector_store.py` | **Task 2:** Stratified sampling (12.5k) → chunking (500 chars) → embedding → save FAISS index | `python scripts/build_vector_store.py --sample_size 12500` |
+| `rag_pipeline.py` | **Task 3 (Planned):** Load FAISS index → retrieve docs → generate LLM answer | *(Coming in Task 3)* |
 
 ## Explanation
 
-These scripts are meant to be:
-- **Independent** — each can run on its own
-- **Reusable** — core logic lives here, not scattered in notebooks
-- **Modular** — you can call them from `app.py` or chain them in workflows
+These scripts handle the **ETL (Extract, Transform, Load)** pipeline for the RAG system. They rely on core logic modules located in `src/`.
 
-They help you move step-by-step from raw data → cleaned data → sample experiments → full vector store → working RAG.
-
-Most scripts accept `--help` to show all flags.
+- **`preprocess.py`**: Handles memory-efficient loading of the massive CSV, filters for the 5 target financial products, and performs text normalization (lowercasing, removing boilerplate).
+- **`build_vector_store.py`**: The main indexing engine. It:
+    1.  Loads processed data.
+    2.  Performs **stratified sampling** to keep product distributions balanced.
+    3.  Chunks text using **LangChain**.
+    4.  Generates embeddings using `all-MiniLM-L6-v2`.
+    5.  Saves a local **FAISS** index.
 
 ## Recommended Workflow
 
-1. `preprocess.py`  
-   → Clean and filter the full dataset
+1.  **Data Cleaning**
+    Run the preprocessor to create the optimized Parquet file:
+    ```bash
+    python scripts/preprocess.py --input data/raw/complaints.csv --output_dir data/processed
+    ```
 
-2. `sample_data.py`  
-   → Create a smaller representative sample
+2.  **Vector Database Creation**
+    Build the FAISS index (Sampling ~12.5k records recommended for local dev):
+    ```bash
+    python scripts/build_vector_store.py --input data/processed/filtered_complaints.parquet --sample_size 12500
+    ```
 
-3. `chunk_and_embed.py`  
-   → Experiment with chunk size, overlap, embedding model on the sample
-
-4. `build_full_index.py`  
-   → Build the production vector store using the pre-computed embeddings
-
-5. `rag_pipeline_test.py`  
-   → Test retrieval + generation before integrating into the UI
-
-6. Finally → use the best settings in `app.py`
+3.  **Testing (Upcoming)**
+    Once Task 3 is complete, you will run the RAG pipeline to query the vector store:
+    ```bash
+    python scripts/rag_pipeline.py --query "Why are personal loans denied?"
+    ```
