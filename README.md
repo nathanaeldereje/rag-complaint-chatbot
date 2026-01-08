@@ -68,14 +68,14 @@ rag-complaint-chatbot/
 ## 🛠️ Getting Started
 
 ### Prerequisites
-*   Python 3.9+
+*   Python 3.12
 *   Virtual Environment recommended
 
 ### Installation
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/your-username/rag-complaint-chatbot.git
+    git clone https://github.com/nathanaeldereje/rag-complaint-chatbot.git
     cd rag-complaint-chatbot
     ```
 
@@ -89,15 +89,23 @@ rag-complaint-chatbot/
     ```bash
     pip install -r requirements.txt
     ```
+4. **Set up API key (required for LLM)**
+   * Copy `.env_example` → `.env`
+   * Add your real Hugging Face token:
+   ```text
+   HUGGINGFACEHUB_API_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   ```
+   * *Note: Never commit your `.env` file.*
 
-4.  **Run Tests**
+5.  **Run Tests**
     Ensure the environment is set up correctly by running the initial smoke tests:
     ```bash
     pytest
     ```
 
 
-### 🔄 Recommended Workflow
+
+### 🔄 Recommended Workflow(As of Jan 08, 2026)
 
 1.  **Data Preparation**
     Analyze data in `notebooks/01_eda_preprocessing.ipynb`, then run the cleaning script:
@@ -109,18 +117,25 @@ rag-complaint-chatbot/
     python scripts/preprocess.py --input data/raw/complaints.csv --output_dir data/processed
     ```
 
-2.  **Vector Store Creation**
-    Experiment with chunking in `notebooks/02_chunking_embedding.ipynb`, then build the FAISS index:
+2.  **Sample Vector Store Creation**
+    Experiment with chunking in `notebooks/02_chunking_embedding.ipynb`, then build a stratified sample FAISS index for testing:
     ```bash
     python scripts/build_vector_store.py --sample_size 12500
     ```
-
-3.  **RAG Pipeline & Testing** (Upcoming)
-    Refine retrieval logic in `notebooks/03_rag_logic.ipynb`, then test via CLI:
+3.  **Full Vector Store Ingestion (Task 3)**
+    Load the pre-computed embeddings (1.37M vectors) into the production FAISS index:
     ```bash
-    python scripts/rag_pipeline.py --question "Why are fees so high?"
+    python scripts/ingest_precomputed_vectors.py
     ```
+    *This creates `vector_store/full_faiss_index` used by the main application.*
 
+3.  **Full Vector Store Ingestion (Task 3)**
+    Load the pre-computed embeddings (1.37M vectors) into the production FAISS index:
+    ```bash
+    python scripts/ingest_precomputed_vectors.py
+    ```
+    *This creates `vector_store/full_faiss_index` used by the main application.*
+    
 4.  **Launch Interface** (Upcoming)
     Start the user-facing web application:
     ```bash
@@ -128,15 +143,15 @@ rag-complaint-chatbot/
     ```
 ---
 
-## 🚀 Project Progress & Roadmap (As of Jan 4/ 2026)
+## 🚀 Project Progress & Roadmap (As of Jan 8/ 2026)
 
 | Phase | Task Description | Status |
 | :--- | :--- | :--- |
 | **0. Setup** | Project Structure, Git, CI/CD, and Environment Setup | ✅ **Completed** |
 | **1. Data** | **EDA & Preprocessing:** Cleaning CFPB data, analyzing narrative lengths, filtering for specific financial products. | ✅ **Completed** |
 | **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | ✅ **Completed** |
-| **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | 🔄 **In Progress** |
-| **4. App** | **User Interface:** Building an interactive Gradio/Streamlit web app for stakeholders. | 📅 Planned |
+| **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | ✅ **Completed** |
+| **4. App** | **User Interface:** Building an interactive Gradio/Streamlit web app for stakeholders. | 🔄 **In Progress** |
 ---
 *Developed as part of the CrediTrust Financial AI Engineering Initiative.*
 
