@@ -8,8 +8,7 @@ import shutil
 import pandas as pd
 from pathlib import Path
 from tqdm import tqdm
-
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
