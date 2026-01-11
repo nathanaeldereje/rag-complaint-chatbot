@@ -39,5 +39,4 @@ faiss-cpu==1.8.0
 # torch==2.3.0
 
 # --- Task 4: UI & App (Commented) ---
-# gradio==4.31.0
-# python-dotenv==1.0.1
+gradio== 4.44.1
