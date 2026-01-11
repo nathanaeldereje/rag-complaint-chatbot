@@ -2,7 +2,7 @@
 
 **Project:** CrediTrust Financial RAG-Powered Chatbot  
 **Role:** Data & AI Engineer  
-**Status:** 🔄 Active Development  
+**Status:** ✅ Completed 
 
 ## Project Overview
 
@@ -136,14 +136,14 @@ rag-complaint-chatbot/
     ```
     *This creates `vector_store/full_faiss_index` used by the main application.*
     
-4.  **Launch Interface** (Upcoming)
+4.  **Launch Interface** 
     Start the user-facing web application:
     ```bash
     python app.py
     ```
 ---
 
-## 🚀 Project Progress & Roadmap (As of Jan 8/ 2026)
+## 🚀 Project Progress & Roadmap
 
 | Phase | Task Description | Status |
 | :--- | :--- | :--- |
@@ -151,11 +151,19 @@ rag-complaint-chatbot/
 | **1. Data** | **EDA & Preprocessing:** Cleaning CFPB data, analyzing narrative lengths, filtering for specific financial products. | ✅ **Completed** |
 | **2. Search** | **Vector Store Creation:** Chunking text, generating embeddings (MiniLM), and indexing with ChromaDB/FAISS. | ✅ **Completed** |
 | **3. Core** | **RAG Pipeline:** Building the Retriever and Generator, Prompt Engineering, and Qualitative Evaluation. | ✅ **Completed** |
-| **4. App** | **User Interface:** Building an interactive Gradio/Streamlit web app for stakeholders. | 🔄 **In Progress** |
+| **4. App** | **User Interface:** Building an interactive Gradio/Streamlit web app for stakeholders. | ✅ **Completed** |
+---
+## 📸 UI Showcase
+
+Below is the deployed interface allowing stakeholders to query the complaint database.
+
+![Main Chat Interface](assets/chat_interface.png)
+*Figure : The Chat Interface providing an AI-generated answer.*
+
 ---
 *Developed as part of the CrediTrust Financial AI Engineering Initiative.*
 
 **Built by:** Nathanael Dereje
 
-**Date of Completion:** January, 2026  
+**Date of Completion:** January 11, 2026  
 

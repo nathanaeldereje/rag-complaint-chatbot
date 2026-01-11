@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 # LangChain Imports
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
+
 # from langchain_huggingface import HuggingFaceEndpoint
 # from langchain_huggingface import ChatHuggingFace
 from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
@@ -50,7 +51,7 @@ class CreditRAG:
         logger.info("Initializing LLM Endpoint...")
 
         hf_llm = HuggingFaceEndpoint(
-            repo_id="mistralai/Mistral-7B-Instruct-v0.2",
+            repo_id=self.repo_id,
             task="text-generation",
             max_new_tokens=512,
             temperature=0.1,
@@ -87,23 +88,60 @@ class CreditRAG:
         """Retrieve relevant documents for a query."""
         return self.retriever.invoke(query)
 
+    # def answer_question(self, query):
+    #     """
+    #     Full RAG pipeline: Retrieve -> Format -> Generate
+    #     """
+    #     # 1. Retrieve
+    #     docs = self.retrieve_documents(query)
+        
+    #     # 2. Combine context
+    #     context_text = "\n\n".join([d.page_content for d in docs])
+        
+    #     # 3. Generate
+    #     chain = self.prompt_template | self.llm
+    #     response = chain.invoke({"context": context_text, "question": query})
+        
+    #     return {
+    #         "question": query,
+    #         "answer": response.content.strip(),
+    #         "source_documents": docs
+    #     }
     def answer_question(self, query):
         """
         Full RAG pipeline: Retrieve -> Format -> Generate
         """
-        # 1. Retrieve
-        docs = self.retrieve_documents(query)
+        # 1. Retrieve (Local - This should always work)
+        try:
+            docs = self.retrieve_documents(query)
+        except Exception as e:
+            logger.error(f"Retrieval failed: {e}")
+            return {
+                "question": query,
+                "answer": "Error: Could not retrieve documents from the local vector store.",
+                "source_documents": []
+            }
         
         # 2. Combine context
         context_text = "\n\n".join([d.page_content for d in docs])
         
-        # 3. Generate
-        chain = self.prompt_template | self.llm
-        response = chain.invoke({"context": context_text, "question": query})
+        # 3. Generate (Remote API - This might fail due to network/timeout)
+        try:
+            chain = self.prompt_template | self.llm
+            response = chain.invoke({"context": context_text, "question": query})
+            answer_text = response.content.strip()
+        except Exception as e:
+            logger.error(f"LLM Generation failed: {e}")
+            # Fallback message so the UI doesn't crash
+            answer_text = (
+                "⚠️ **Network Error**: The Hugging Face Inference API timed out.\n\n"
+                "However, the **Retrieval System** is working correctly. "
+                "Please check the 'Reference Sources' below to see the data found for your query."
+            )
         
         return {
             "question": query,
-            "answer": response.content.strip(),
+            "answer": answer_text,
             "source_documents": docs
         }
 def parse_args():
